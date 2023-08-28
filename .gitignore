@@ -24,6 +24,5 @@ media/
 db.sqlite3
 
 # Other sensitive or environment-specific information
-*.env
 *env
 
