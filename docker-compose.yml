@@ -1,0 +1,72 @@
+version: '3.7'
+
+services:
+  django_gunicorn:
+    volumes:
+      - static:/static
+      - ./mysql-config/my.cnf:/etc/my.cnf  # Yapılandırma dosyasını monte etme
+
+    env_file:
+      - .env
+    environment:
+      - STATIC_ROOT=/static
+    build:
+      context: .
+
+    
+    ports:
+      - "8000:8000"
+    networks:
+      - mynetwork  # Hepsini aynı ağa ekleyin
+
+  nginx:
+    build: ./nginx
+    volumes:
+      - static:/static
+    ports:
+      - "80:80"
+    depends_on:
+      - django_gunicorn
+    networks:
+      - mynetwork  # Hepsini aynı ağa ekleyin
+
+  mysql:
+    image: mysql:latest
+
+    env_file:
+      - .env
+    environment:
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./mysql-config/my.cnf:/etc/my.cnf  # Yapılandırma dosyasını monte etme
+
+
+    command: --default-authentication-plugin=caching_sha2_password
+
+    networks:
+      - mynetwork  # Hepsini aynı ağa ekleyin
+
+
+  redis:  # Yeni eklenen Redis servisi
+
+    image: redis:latest
+    
+    ports:
+      - "6379:6379"  # Redis varsayılan portu
+    networks:
+      - mynetwork
+
+networks:
+  mynetwork:
+    driver: bridge
+  
+volumes:
+  static:
+  mysql_data:
+

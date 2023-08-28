@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{% block title %}Default Title{% endblock %}</title>
+</head>
+<body>
+    <header>
+        <h1>Website Başlığı base HTML</h1>
+    </header>
+    
+    <nav>
+        <!-- Site navigasyonu burada olabilir -->
+    </nav>
+    
+    <main>
+        {% block content %}
+
+
+        {% endblock %}
+    </main>
+
+
+    
+    <footer>
+        <p>Telif Hakkı © 2023</p>
+    </footer>
+</body>
+</html>

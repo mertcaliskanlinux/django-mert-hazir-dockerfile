@@ -1,0 +1,29 @@
+# Compiled Python files
+__pycache__/
+*.py[cod]
+
+# Virtual environment
+venv/
+env/
+
+# IDE-specific files
+.idea/
+
+# Logs
+*.log
+
+# Django media files
+media/
+
+# Compiled CSS and JavaScript
+*.css.map
+*.js.map
+*.js.gz
+
+# Database
+db.sqlite3
+
+# Other sensitive or environment-specific information
+*.env
+*env
+

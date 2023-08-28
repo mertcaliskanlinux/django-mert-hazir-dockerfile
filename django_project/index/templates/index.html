@@ -1,0 +1,30 @@
+{% extends "particles/base.html" %}
+
+{% block title %}Ana Sayfa{% endblock %}
+
+{% block content %}
+    <p> İNDEX Siteye hoş geldiniz! Bu ana sayfadaki içerik burada olacak.</p>
+    <h1>All Data 123</h1>
+        {% if data %}
+            <ul>
+            {% for item in data %}
+                <p>Here is a link1 to the <a href="{% url 'about' %}">about page</a>.</p>
+                <p>Here is a link to the <a href="{% url 'other_page' %}">other_page page</a>.</p>
+
+
+                <li>Id: {{ item.id }}</li>
+                <li>Title: {{ item.title }}</li>
+                <li>Content: {{ item.content }}</li>
+               <img src="{{ item.image.url }}" alt="{{ item.title }}">
+
+
+            {% endfor %}
+
+            </ul>
+        {% else %}
+            <p>No data available.</p>
+        {% endif %}
+
+    {% include "other_page.html" with other_page_content=other_page_content %}
+        
+{% endblock %}

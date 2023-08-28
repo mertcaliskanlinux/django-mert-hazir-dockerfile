@@ -1,0 +1,27 @@
+
+
+{% block other_page_content %}
+    <h3>Bu kısım temel şablonun bloğunu dolduruyor.</h3>
+    <p>Bu içerik bloğunu doldurarak temel şablonun içeriğini genişletebilirsiniz.</p>
+{% endblock %}
+
+
+
+
+{% block content %}
+    <h2>Diğer Sayfa İçeriği</h2>
+    <p>Bu sayfanın içeriği burada olacak.</p>
+    
+    <ul>
+        
+    {% for item in data %}
+        <li>{{ item }}</li>
+    
+    {% endfor %}
+    
+    <p>Here is a link to the <a href="{% url 'about' %}">about page</a>.</p>
+    <p>Here is a link to the <a href="{% url 'index' %}">İndex page</a>.</p>
+
+    </ul>
+    
+{% endblock %}
